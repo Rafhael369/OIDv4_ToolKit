@@ -14,5 +14,15 @@ Python3 é necessário.
    ```
 3. Execute o script de download
    ```bash
-   python main.py downloader --classes Apple Orange --type_csv train --limit 500
+   python3 main.py downloader --classes Car Person --type_csv train --limit 1000
+   ```
+
+4. Converta as os arquivos de bboxs para o formato yolo
+   ```bash
+   python3 converter_yolo.py
+   ```
+
+5. Enumere as classes de acordo com o número delas. *_Edite o arquivo antes de usar._*
+   ```bash
+   python3 enumerar_classes.py
    ```
