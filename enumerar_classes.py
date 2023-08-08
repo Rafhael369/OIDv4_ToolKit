@@ -1,38 +1,34 @@
 import os
-import re
 
 
-def replace_tags_in_lines(file_path, replacements):
+def replace_first_number_in_lines(file_path, replacement):
     with open(file_path, 'r') as file:
         lines = file.readlines()
 
     with open(file_path, 'w') as file:
         for line in lines:
-            for tag, replacement in replacements.items():
-                pattern = r'\b{}\b'.format(re.escape(tag))
-                line = re.sub(pattern, replacement, line)
-            file.write(line)
+            words = line.split()
+            if words:
+                try:
+                    first_word = int(words[0])
+                    new_line = line.replace(str(first_word), str(replacement), 1)
+                    file.write(new_line)
+                except ValueError:
+                    file.write(line)
 
 
-def main(directory_path, replacements):
+def main(directory_path, replacement):
     for filename in os.listdir(directory_path):
         if filename.endswith(".txt"):
             file_path = os.path.join(directory_path, filename)
-            replace_tags_in_lines(file_path, replacements)
+            replace_first_number_in_lines(file_path, replacement)
 
 
 if __name__ == "__main__":
     # Substitua pelo caminho do diretório que contém os arquivos .txt
-    directory_path = "/home/rafa/Documentos/yolov8/OIDv4_ToolKit/OID/Dataset/train/Vehicle registration plate/Label"
+    directory_path = '/home/rafa/Documentos/yolov8/OIDv4_ToolKit/OID/Dataset/train/Vehicle registration plate'
 
-    # Substitua as tags pelas palavras correspondentes (incluindo tags compostas)
-    replacements = {
-        '4':'Truck',  # Substitui "Car red" por "3"
-        '3':'Car',
-        '0':'Person',
-        '5':'Bus',
-        '1':'Vehicle registration plate'
-        # Adicione mais pares de substituição conforme necessário
-    }
+    # Substitua o número pelo valor desejado
+    replacement_number = 1
 
-    main(directory_path, replacements)
+    main(directory_path, replacement_number)

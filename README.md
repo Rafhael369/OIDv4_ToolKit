@@ -22,7 +22,7 @@ Python3 é necessário.
    python3 converter_yolo.py
    ```
 
-5. Enumere as classes de acordo com o número delas. *_Edite o arquivo antes de usar._*
+5. Enumere as classes de acordo com o número delas. *_Edite o arquivo antes de usar, o caminho da pasta (Bus, Person, etc)_e o numero da classe*
    ```bash
    python3 enumerar_classes.py
    ```
